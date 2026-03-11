@@ -1,26 +1,433 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Font */
+  --font-sans: "Poppins", sans-serif;
+
+  /* Breakpoints — match mybody.health: tablet=40em(640px), desktop=62em(992px) */
+  --breakpoint-tablet: 40em;
+  --breakpoint-desktop: 62em;
+
+  /* Primary — blue brand (extracted from live site CSS bundle) */
+  --color-primary-main: #027aff;
+  --color-primary-800: #3595ff;
+  --color-primary-600: #67afff;
+  --color-primary-400: #9acaff;
+  --color-primary-200: #cce4ff;
+  --color-primary-100: #e6f2ff;
+
+  /* Secondary — near-black (opacity scale from live site) */
+  --color-secondary-main: #292b2c;
+  --color-secondary-800: #292b2ccc;  /* ~80% opacity */
+  --color-secondary-600: #292b2c99;  /* ~60% opacity */
+  --color-secondary-400: #292b2c66;  /* ~40% opacity */
+  --color-secondary-200: #292b2c33;  /* ~20% opacity */
+  --color-secondary-100: #292b2c1a;  /* ~10% opacity */
+
+  /* Tertiary — light blue tint */
+  --color-tertiary-main: #c7e0fe;
+  --color-tertiary-800: #d2e6fe;
+  --color-tertiary-600: #ddedfe;
+  --color-tertiary-400: #e9f3ff;
+  --color-tertiary-200: #f4f9ff;
+  --color-tertiary-100: #f9fcff;
+
+  /* Success */
+  --color-success-main: #1ca455;
+  --color-success-800: #48b677;
+  --color-success-600: #74c799;
+  --color-success-400: #a1d9bb;
+  --color-success-200: #cdeadd;
+  --color-success-100: #e3f3ee;
+
+  /* Warning */
+  --color-warning-main: #e38124;
+  --color-warning-800: #e79a50;
+  --color-warning-600: #ebb27c;
+  --color-warning-400: #efcaa7;
+  --color-warning-200: #f3e3d3;
+  --color-warning-100: #f5efe9;
+
+  /* Danger */
+  --color-danger-main: #e91010;
+  --color-danger-800: #ed4040;
+  --color-danger-600: #f27070;
+  --color-danger-400: #f69f9f;
+  --color-danger-200: #fbcfcf;
+  --color-danger-100: #fde7e7;
+
+  /* Accent2 — deep indigo */
+  --color-accent2-main: #0d1b98;
+  --color-accent2-800: #3d49ad;
+  --color-accent2-600: #6e76c1;
+  --color-accent2-400: #9ea4d6;
+  --color-accent2-200: #cfd1ea;
+  --color-accent2-100: #e7e8f5;
+
+  /* Neutral */
+  --color-neutral-white: #ffffff;
+  --color-neutral-black: #000000;
+
+  /* Text */
+  --color-text-primary: #292b2c;
+  --color-text-muted: #6b7280;
+
+  /* Border helpers (semi-transparent secondary) */
+  --color-border-light: color-mix(in srgb, #292b2c 10%, transparent);
+  --color-border-medium: color-mix(in srgb, #292b2c 20%, transparent);
+
+  /* ── Typography scale (extracted from live site CSS bundle) ── */
+  --color-transparent: transparent;
+
+  /* Headings — mobile */
+  --text-h1-mobile: 1.75rem;
+  --text-h1-mobile--line-height: 2.5rem;
+  --text-h2-mobile: 1.75rem;
+  --text-h2-mobile--line-height: 2.5rem;
+  --text-h3-mobile: 1.5rem;
+  --text-h3-mobile--line-height: 2rem;
+  --text-h4-mobile: 1.25rem;
+  --text-h4-mobile--line-height: 1.75rem;
+  --text-h5-mobile: 1.25rem;
+  --text-h5-mobile--line-height: 1.75rem;
+
+  /* Headings — desktop */
+  --text-h1: 3rem;
+  --text-h1--line-height: 4rem;
+  --text-h2: 2.5rem;
+  --text-h2--line-height: 3.5rem;
+  --text-h3: 2.25rem;
+  --text-h3--line-height: 3rem;
+  --text-h4: 1.75rem;
+  --text-h4--line-height: 2.5rem;
+  --text-h5: 1.5rem;
+  --text-h5--line-height: 2rem;
+  --text-h6: 1.25rem;
+  --text-h6--line-height: 1.75rem;
+
+  /* Title scale */
+  --text-title-large: 3rem;
+  --text-title-large--line-height: 4rem;
+  --text-title-regular: 2rem;
+  --text-title-regular--line-height: 2.5rem;
+  --text-title-small: 1.5rem;
+  --text-title-small--line-height: 2rem;
+
+  /* Body scale */
+  --text-body-large: 1.125rem;
+  --text-body-large--line-height: 1.75rem;
+  --text-body-regular: 1rem;
+  --text-body-regular--line-height: 1.5rem;
+  --text-body-small: 0.875rem;
+  --text-body-small--line-height: 1.25rem;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+
+  /* ── Animation shorthands (extracted from live site CSS bundle) ── */
+  --animate-fade-in: fade-in 0.3s ease-in forwards;
+  --animate-fade-out: fade-out 0.3s ease-out forwards;
+  --animate-expand: expand 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  --animate-collapse: collapse 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  --animate-slide-up-and-fade: slide-up-and-fade 0.3s ease-in;
+  --animate-slide-down-and-fade: slide-down-and-fade 0.3s ease-in;
+  --animate-slide-left-and-fade: slide-left-and-fade 0.3s ease-in;
+  --animate-slide-right-and-fade: slide-right-and-fade 0.3s ease-in;
+  --animate-scale-in: scale-in 0.2s ease-out forwards;
+  --animate-scale-out: scale-out 0.2s ease-in forwards;
+  --animate-slide-in-toast: slide-in-toast 0.15s ease-in;
+  --animate-swipe-out-toast: swipe-out-toast 0.15s ease-out;
+  --animate-expand-ease-out: expand 0.3s ease-out forwards;
+  --animate-collapse-ease-out: collapse 0.3s ease-out forwards;
+  --animate-dots: dots 1s infinite;
+
+  /* Border radius */
+  --radius-xs: 0.25rem;
+  --radius-s: 0.375rem;
+  --radius-m: 0.5rem;
+  --radius-l: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-xxl: 1.5rem;
+  --radius-full: 9999px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
+  padding: 0;
+  /* margin: 0; */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  color: #292b2c;
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out both;
+}
+
+@keyframes slide-left-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-left-in {
+  animation: slide-left-in 0.25s ease-out both;
+}
+
+/* Utility: container */
+.quiz-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .quiz-container {
+    padding: 0 2rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Global typography utilities
+   Values extracted from mybody.health CSS bundle (:root tokens)
+   ───────────────────────────────────────────────────────────── */
+
+/*
+ * .headline2
+ * --text-h2-mobile: 1.75rem / line-height 2.5rem  (mobile)
+ * --text-h2:        2.5rem  / line-height 3.5rem  (desktop ≥62em)
+ * --font-weight-headline: 700
+ */
+.headline2 {
+  font-size: 1.75rem;
+  line-height: 2.5rem;
+  font-weight: 600;
+  color: var(--color-secondary-main);
+}
+@media (min-width: 62em) {
+  .headline2 {
+    font-size: 2.5rem;
+    line-height: 3.5rem;
+  }
+}
+
+/*
+ * .body-regular — --text-body-regular: 1rem / line-height 1.5rem
+ */
+.body-regular {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+/*
+ * .body-large — --text-body-large: 1.125rem / line-height 1.75rem
+ */
+.body-large {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+/*
+ * .section-p-hero — extracted from CSS bundle (--spacing = 0.25rem):
+ *   mobile:  pt-6  / pb-10  → 1.5rem / 2.5rem
+ *   tablet:  pt-12 / pb-12  → 3rem   / 3rem
+ *   desktop: pt-24 / pb-24  → 6rem   / 6rem
+ */
+.section-p-hero {
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+@media (min-width: 40em) {
+  .section-p-hero {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+@media (min-width: 62em) {
+  .section-p-hero {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Startnow / Hero page utilities
+   Mirrors mybody.health/startnow/uni-s-mb-pbp-sugar structure
+   ───────────────────────────────────────────────────────────── */
+
+/* Header: 4rem mobile, 5rem desktop (≥62em) */
+.startnow-header {
+  height: 4rem;
+}
+@media (min-width: 62em) {
+  .startnow-header {
+    height: 5rem;
+  }
+}
+
+/* Hero section: full viewport minus header height */
+.startnow-hero {
+  height: calc(100vh - 4rem);
+}
+@media (min-width: 62em) {
+  .startnow-hero {
+    height: calc(100vh - 5rem);
+  }
+}
+
+/*
+ * Shared container — 1280px content + 2×gutter
+ * Gutter: 1rem mobile → 2rem tablet (≥40em) / desktop (≥62em)
+ */
+.startnow-container {
+  max-width: calc(1280px + 2 * 1rem);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 40em) {
+  .startnow-container {
+    max-width: calc(1280px + 2 * 2rem);
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/*
+ * CSS Grid — matches original's responsive columns:
+ *   4-col / 1rem gap    (mobile  <40em)
+ *   8-col / 1.5rem gap  (tablet  ≥40em / 640px)
+ *   12-col / 2rem gap   (desktop ≥62em / 992px)
+ *
+ * grid-template-rows:
+ *   mobile/tablet → "1fr auto"  row-1 spacer expands, content (row-2) anchors to bottom
+ *   desktop       → "1fr"       single row spans full section height, self-center works
+ */
+.startnow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr auto;
+  column-gap: 1rem;
+}
+@media (min-width: 40em) {
+  .startnow-grid {
+    grid-template-columns: repeat(8, 1fr);
+    column-gap: 1.5rem;
+  }
+}
+@media (min-width: 62em) {
+  .startnow-grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+    column-gap: 2rem;
+  }
+}
+
+/*
+ * Content panel grid-area — mirrors original exactly:
+ *   mobile:  [grid-area:2/1/3/5]  → all 4 cols, row 2 (bottom-anchored)
+ *   tablet:  [grid-area:2/1/3/9]  → all 8 cols, row 2 (bottom-anchored)
+ *   desktop: [grid-area:1/1/2/6]  → cols 1-5, row 1 (vertically centered)
+ */
+.startnow-content {
+  grid-area: 2 / 1 / 3 / 5;
+}
+@media (min-width: 40em) {
+  .startnow-content {
+    grid-area: 2 / 1 / 3 / 9;
+  }
+}
+@media (min-width: 62em) {
+  .startnow-content {
+    grid-area: 1 / 1 / 2 / 6;
+  }
+}
+
+/*
+ * Body wrapper — mirrors [&>*]:mt-6 tablet:mt-8 desktop:mt-12 on each child.
+ *
+ * margin-top   = gap between headline (sibling above) and first child (ul)
+ * gap          = spacing between ul and the selector div
+ *
+ * Both values mirror the responsive [&>*]:mt-* scale:
+ *   mobile  → mt-6  = 1.5rem
+ *   tablet  → mt-8  = 2rem
+ *   desktop → mt-12 = 3rem
+ *
+ * desktop:max-w-96 (24rem) limits content width within the left 5 cols
+ */
+.startnow-body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+}
+@media (min-width: 40em) {
+  .startnow-body {
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+}
+@media (min-width: 62em) {
+  .startnow-body {
+    margin-top: 3rem;
+    gap: 3rem;
+    max-width: 24rem; /* desktop:max-w-96 — mirrors original */
+  }
+}
+
+/*
+ * A1C answer button — mirrors original exactly:
+ *   h-12 · px-3 · rounded-l (--radius-l = 0.75rem) · border-[1.5px] border-transparent
+ *   bg-primary-main · text-neutral-white · font-semibold · body-regular
+ */
+.startnow-btn {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+  text-align: center;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--color-primary-main);
+  width: 100%;
+  height: 3rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 0.75rem; /* rounded-l = --border-radius-l = 0.75rem */
+  transition: background-color 150ms ease, transform 100ms ease;
+  outline: none;
+}
+.startnow-btn:hover {
+  background-color: var(--color-primary-600);
+}
+.startnow-btn:active {
+  transform: scale(0.98);
 }
