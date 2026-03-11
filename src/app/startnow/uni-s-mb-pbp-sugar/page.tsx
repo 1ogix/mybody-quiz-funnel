@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import MyBodyLogo from "@/components/layout/MyBodyLogo";
+import { QUIZ_BASE_PATH } from "@/data/funnelRoutes";
 
 const BULLETS = [
   "See real changes in just 7 days",
@@ -47,7 +48,7 @@ export default function StartnowPage() {
     } catch {
       // localStorage not available (SSR or private browsing)
     }
-    router.push("/quiz/uni-s-mb-pbp-sugar/1");
+    router.push(QUIZ_BASE_PATH);
   }
 
   return (

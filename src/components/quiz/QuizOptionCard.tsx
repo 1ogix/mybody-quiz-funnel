@@ -1,6 +1,8 @@
 "use client";
 
 interface QuizOptionCardProps {
+  id?: string;
+  testId?: string;
   label: string;
   emoji?: string;
   selected?: boolean;
@@ -8,6 +10,8 @@ interface QuizOptionCardProps {
 }
 
 export default function QuizOptionCard({
+  id,
+  testId,
   label,
   emoji,
   selected = false,
@@ -15,6 +19,8 @@ export default function QuizOptionCard({
 }: QuizOptionCardProps) {
   return (
     <button
+      id={id}
+      data-testid={testId}
       type="button"
       onClick={onClick}
       className="w-full text-left cursor-pointer transition duration-200 ease-linear"
@@ -54,8 +60,7 @@ export default function QuizOptionCard({
             width: 48,
             height: 48,
             borderRadius: "0.5rem",
-            backgroundColor: "var(--color-primary-100)",
-            fontSize: 28,
+            fontSize: 48,
             lineHeight: 1,
           }}
         >
@@ -66,7 +71,7 @@ export default function QuizOptionCard({
       {/* Label */}
       <div className="flex-grow">
         <p
-          className="text-base font-medium"
+          className="body-large font-medium"
           style={{ color: "var(--color-secondary-main)" }}
         >
           {label}

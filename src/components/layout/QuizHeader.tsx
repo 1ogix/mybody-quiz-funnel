@@ -13,35 +13,27 @@ export default function QuizHeader({
   onBack,
   showBack = true,
 }: QuizHeaderProps) {
-  // translateX trick: inner div is 100% wide, shifted left by (100 - progress)%
   const translateX = -(100 - progress);
 
   return (
     <header
-      className="border-b"
+      className="border-b [--linear-progress-height:0.25rem]"
       style={{
         borderColor: "var(--color-secondary-200)",
-        "--linear-progress-height": "0.25rem",
       } as React.CSSProperties}
     >
-      {/* Nav row */}
       <div
-        className="relative mx-auto flex items-center px-4"
+        className="relative mx-auto mb-[calc(var(--linear-progress-height)*-1)] flex h-[calc(4rem+var(--linear-progress-height))] max-w-[calc(76rem+2rem)] items-center px-4 tablet:h-[calc(5rem+var(--linear-progress-height))] tablet:max-w-[calc(76rem+4rem)] tablet:px-8"
         style={{
-          maxWidth: "calc(76rem + 2 * 1rem)",
-          height: "calc(4rem + var(--linear-progress-height, 0.25rem))",
-          marginBottom: "calc(var(--linear-progress-height, 0.25rem) * -1)",
+          width: "100%",
         }}
       >
-        {/* Back button */}
         {showBack && (
           <button
             onClick={onBack}
             aria-label="Go back"
-            className="flex cursor-pointer items-center justify-center rounded-[0.375rem] border-[1.5px] border-transparent bg-transparent transition-colors"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-s border-[1.5px] border-transparent bg-transparent transition-colors tablet:size-12 [&>svg]:size-6"
             style={{
-              width: 40,
-              height: 40,
               color: "var(--color-primary-main)",
             }}
             onMouseEnter={(e) =>
@@ -68,11 +60,9 @@ export default function QuizHeader({
           </button>
         )}
 
-        {/* Logo — absolute centered */}
-        <MyBodyLogo className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-9" />
+        <MyBodyLogo className="absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 tablet:h-10" />
       </div>
 
-      {/* Progress bar */}
       <div
         role="progressbar"
         aria-valuemin={0}

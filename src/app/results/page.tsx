@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Button from "@/components/ui/Button";
+import { FUNNEL_CODE, getCheckoutPath } from "@/data/funnelRoutes";
 
 const STATS = [
   { label: "Users who reduced A1C", value: "93%" },
@@ -92,7 +93,7 @@ export default function ResultsPage() {
 
         {/* CTA */}
         <div className="flex flex-col gap-3">
-          <Button onClick={() => router.push("/offer")}>
+          <Button onClick={() => router.push(`${getCheckoutPath(FUNNEL_CODE)}&step=plan-select`)}>
             Get My Plan →
           </Button>
           <p className="text-xs text-center" style={{ color: "#6b7280" }}>

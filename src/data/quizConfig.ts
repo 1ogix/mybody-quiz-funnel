@@ -142,12 +142,39 @@ export const funnelSteps: QuizStep[] = [
     ],
   },
   {
+    // Matches devtools HTML: data-testid="quiz__question-trusted_by_many"
     id: 2,
+    type: "info",
+    question: "trusted_by_many",
+    nextStep: 3,
+  },
+  {
+    id: 3,
+    type: "single-select",
+    question: "What's your main goal?",
+    autoAdvance: true,
+    nextStep: 4,
+    answers: [
+      { id: "lose_weight", label: "Lose weight", emoji: "📉" },
+      {
+        id: "balance_blood_sugar",
+        label: "Balance my blood sugar",
+        emoji: "🍬",
+      },
+      {
+        id: "boost_energy",
+        label: "Boost energy and feel better",
+        emoji: "🤸",
+      },
+    ],
+  },
+  {
+    id: 4,
     type: "single-select",
     question: "How old are you?",
     subtitle: "Your age helps us tailor the right plan for you.",
     autoAdvance: true,
-    nextStep: 3,
+    nextStep: 5,
     answers: [
       { id: "18-29", label: "18–29 years old", emoji: "🧑" },
       { id: "30-39", label: "30–39 years old", emoji: "🧑" },
@@ -156,26 +183,12 @@ export const funnelSteps: QuizStep[] = [
     ],
   },
   {
-    id: 3,
-    type: "single-select",
-    question: "What is your main goal?",
-    subtitle: "Choose the one that matters most to you right now.",
-    autoAdvance: true,
-    nextStep: 4,
-    answers: [
-      { id: "blood-sugar", label: "Reduce blood sugar", emoji: "🩸" },
-      { id: "lose-weight", label: "Lose weight", emoji: "⚖️" },
-      { id: "eat-healthy", label: "Eat healthier", emoji: "🥦" },
-      { id: "more-energy", label: "More energy", emoji: "⚡" },
-    ],
-  },
-  {
-    id: 4,
+    id: 5,
     type: "single-select",
     question: "How active are you?",
     subtitle: "Be honest — this helps us set realistic goals.",
     autoAdvance: true,
-    nextStep: 5,
+    nextStep: 6,
     answers: [
       { id: "sedentary", label: "Not active", emoji: "🛋️" },
       { id: "light", label: "Lightly active", emoji: "🚶" },
@@ -184,7 +197,7 @@ export const funnelSteps: QuizStep[] = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     type: "number-input",
     question: "How much do you weigh?",
     subtitle: "We use this to personalise your calorie and meal targets.",
@@ -192,14 +205,14 @@ export const funnelSteps: QuizStep[] = [
     inputUnit: "lbs",
     inputMin: 66,
     inputMax: 440,
-    nextStep: 6,
+    nextStep: 7,
   },
   {
-    id: 6,
+    id: 7,
     type: "multi-select",
     question: "What is your biggest challenge?",
     subtitle: "Select all that apply.",
-    nextStep: 7,
+    nextStep: 8,
     answers: [
       { id: "cravings", label: "Sugar cravings", emoji: "🍭" },
       { id: "no-time", label: "No time to cook", emoji: "⏰" },
@@ -208,21 +221,22 @@ export const funnelSteps: QuizStep[] = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     type: "email-input",
     question: "Where should we send your personalised plan?",
     subtitle: "Join 2M+ people who improved their health with MyBody.",
     inputPlaceholder: "Enter your email address",
-    nextStep: 8,
+    nextStep: 9,
   },
 ];
 
 export const FUNNEL_PROGRESS: Record<number, number> = {
-  1: 3,
-  2: 17,
-  3: 31,
-  4: 45,
-  5: 60,
-  6: 75,
-  7: 90,
+  1: 3.3333333333333335,
+  2: 7,
+  3: 20,
+  4: 33,
+  5: 48,
+  6: 63,
+  7: 78,
+  8: 90,
 };
