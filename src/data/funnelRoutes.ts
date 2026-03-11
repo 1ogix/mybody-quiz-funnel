@@ -9,7 +9,7 @@ export const CHECKOUT_PATH = `/checkout/${FUNNEL_SLUG}`;
 export const CHECKOUT_RESULT_PATH = "/checkout/result";
 
 const STEP_QUESTION_BY_ID: Record<number, string | undefined> = {
-  1: undefined,
+  1: "gender",
   2: "trusted_by_many",
   3: "main_goal",
   4: "body_goals",
@@ -19,6 +19,7 @@ const STEP_QUESTION_BY_ID: Record<number, string | undefined> = {
 };
 
 const QUESTION_STEP_MAP = new Map<string, number>([
+  ["gender", 1],
   ["trusted_by_many", 2],
   ["main_goal", 3],
   ["body_goals", 4],
