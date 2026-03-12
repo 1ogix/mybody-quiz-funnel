@@ -1,5 +1,8 @@
 import FunnelStepPage from "@/components/quiz/FunnelStepPage";
-import { getStepIdFromQuestion } from "@/data/funnelRoutes";
+import {
+  DEFAULT_FUNNEL_QUESTION,
+  getStepIdFromQuestion,
+} from "@/data/funnelRoutes";
 
 interface PageProps {
   searchParams?: Promise<{ question?: string }>;
@@ -8,6 +11,7 @@ interface PageProps {
 export default async function FunnelEntryPage({ searchParams }: PageProps) {
   const params = searchParams ? await searchParams : undefined;
   const stepId = getStepIdFromQuestion(params?.question);
+  const activeQuestionKey = params?.question ?? DEFAULT_FUNNEL_QUESTION;
 
-  return <FunnelStepPage stepId={stepId} />;
+  return <FunnelStepPage stepId={stepId} activeQuestionKey={activeQuestionKey} />;
 }

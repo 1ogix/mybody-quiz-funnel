@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { funnelSteps, FUNNEL_PROGRESS } from "@/data/quizConfig";
+import { funnelSteps } from "@/data/quizConfig";
 import { useQuizState } from "@/hooks/useQuizState";
 import QuizHeader from "@/components/layout/QuizHeader";
 import QuizOptionCard from "@/components/quiz/QuizOptionCard";
@@ -12,6 +12,7 @@ import EmailInput from "@/components/quiz/EmailInput";
 import TrustedByMany from "@/components/quiz/TrustedByMany";
 import BodyGoalsQuestion from "@/components/quiz/BodyGoalsQuestion";
 import {
+  getProgressPercentForQuestion,
   getQuestionFromStepId,
   getLoaderPath,
   getQuizPathForStep,
@@ -23,9 +24,13 @@ const EMAIL_STEP_ID = 8;
 
 interface FunnelStepPageProps {
   stepId: number;
+  activeQuestionKey?: string;
 }
 
-export default function FunnelStepPage({ stepId }: FunnelStepPageProps) {
+export default function FunnelStepPage({
+  stepId,
+  activeQuestionKey,
+}: FunnelStepPageProps) {
   const router = useRouter();
   const { answers, setAnswer, goToStep, hydrated } = useQuizState();
 
@@ -80,8 +85,10 @@ export default function FunnelStepPage({ stepId }: FunnelStepPageProps) {
     router.push(getQuizPathForStep(currentStep.id - 1));
   }
 
-  const progress = FUNNEL_PROGRESS[currentStep.id] ?? 50;
-  const stepQuestionKey = getQuestionFromStepId(currentStep.id) ?? `step-${currentStep.id}`;
+  const fallbackQuestionKey =
+    getQuestionFromStepId(currentStep.id) ?? `step-${currentStep.id}`;
+  const stepQuestionKey = activeQuestionKey ?? fallbackQuestionKey;
+  const progress = getProgressPercentForQuestion(stepQuestionKey);
   const isBodyGoals = stepQuestionKey === "body_goals";
   const selectedGender = answers[1] === "male" ? "male" : "female";
   const questionContainerClass = isBodyGoals

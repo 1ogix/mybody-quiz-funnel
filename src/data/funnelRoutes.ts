@@ -7,6 +7,38 @@ export const EMAIL_PATH = `/email/${FUNNEL_SLUG}`;
 export const LOADER_PATH = `/loader/${FUNNEL_SLUG}`;
 export const CHECKOUT_PATH = `/checkout/${FUNNEL_SLUG}`;
 export const CHECKOUT_RESULT_PATH = "/checkout/result";
+export const DEFAULT_FUNNEL_QUESTION = "gender";
+
+export const FUNNEL_QUESTION_ORDER: string[] = [
+  "gender",
+  "trusted_by_many",
+  "main_goal",
+  "body_goals",
+  "studies_prove",
+  "height",
+  "weight",
+  "target_weight",
+  "age",
+  "weight_changes",
+  "day_spending",
+  "last_time_felt_good_about_weight",
+  "eating_preferences",
+  "meals_per_day",
+  "sugar_intake",
+  "activity_level",
+  "perfect_solution",
+  "water_intake",
+  "cooking_time",
+  "eating_out",
+  "have_allergies",
+  "allergies",
+  "omit_nonos",
+  "specialists",
+  "do_you_have_medical_conditions",
+  "what_medical_conditions",
+  "special_event",
+  "event_date",
+];
 
 const STEP_QUESTION_BY_ID: Record<number, string | undefined> = {
   1: "gender",
@@ -46,6 +78,7 @@ const QUESTION_STEP_MAP = new Map<string, number>([
   ["do_you_have_medical_conditions", 8],
   ["what_medical_conditions", 8],
   ["special_event", 8],
+  ["event_date", 8],
   ["weight_loss_forecast", 8],
   ["wellness_summary", 8],
 ]);
@@ -82,4 +115,14 @@ export function getLoaderPath(code: string = FUNNEL_CODE): string {
 
 export function getCheckoutPath(code: string = FUNNEL_CODE): string {
   return `${CHECKOUT_PATH}?code=${code}`;
+}
+
+export function getProgressPercentForQuestion(question?: string | null): number {
+  const key = question || DEFAULT_FUNNEL_QUESTION;
+  const index = FUNNEL_QUESTION_ORDER.indexOf(key);
+  if (index < 0) {
+    return 5;
+  }
+
+  return ((index + 1) / FUNNEL_QUESTION_ORDER.length) * 100;
 }

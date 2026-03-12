@@ -230,13 +230,3 @@ export const funnelSteps: QuizStep[] = [
   },
 ];
 
-export const FUNNEL_PROGRESS: Record<number, number> = {
-  1: 3.3333333333333335,
-  2: 7,
-  3: 11,
-  4: 14,
-  5: 18,
-  6: 63,
-  7: 78,
-  8: 90,
-};
