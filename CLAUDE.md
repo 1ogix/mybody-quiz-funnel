@@ -50,7 +50,23 @@ src/
       FunnelStepPage.tsx                       <- main quiz renderer + nav
       QuizOptionCard.tsx                       <- single-select option cards
       BodyGoalsQuestion.tsx                    <- custom body_goals layout
-      TrustedByMany.tsx                        <- info step
+      StudiesProveQuestion.tsx                 <- studies_prove info step
+      HeightQuestion.tsx                       <- custom height step (ft/cm)
+      WeightQuestion.tsx                       <- custom current weight step (lb/kg + BMI callout)
+      TargetWeightQuestion.tsx                 <- target weight step (kg)
+      AgeQuestion.tsx                          <- age input step + explanatory card
+      WeightChangesQuestion.tsx                <- chart info step using current/target weights
+      MealsPerDayQuestion.tsx                  <- custom meals_per_day selections + callout
+      ActivityLevelQuestion.tsx                <- custom activity_level options + dynamic message
+      LastTimeFeltGoodQuestion.tsx             <- custom wellness milestone options
+      PerfectSolutionQuestion.tsx              <- solution expectation options
+      CookingTimeQuestion.tsx                  <- cooking time options + note card
+      FoodPreferencesQuestion.tsx              <- shared multi-select UI for allergies/nonos
+      SpecialistsQuestion.tsx                  <- specialists info card list
+      MedicalConditionsQuestion.tsx            <- conditions multi-select + disclaimer
+      EventDateQuestion.tsx                    <- event date input step
+      WeightLossForecastQuestion.tsx           <- dynamic forecast info/chart step
+      TrustedByMany.tsx                        <- trusted_by_many info step
       MultiSelect.tsx / NumberInput.tsx / EmailInput.tsx
 
   data/
@@ -80,10 +96,27 @@ These are currently implemented with real UI:
 2. `trusted_by_many` (info screen)
 3. `main_goal` (single select)
 4. `body_goals` (custom multi-select + body image + connector SVGs)
-5. `studies_prove`
-6. `height`
-7. `weight`
-8. email step (`/email/uni-s-mb-pbp-sugar`)
+5. `studies_prove` (image + proof/callout card + next)
+6. `height` (FT/CM segmented numeric input)
+7. `weight` (LB/KG segmented numeric input + dynamic BMI message)
+8. `target_weight` (kg numeric input)
+9. `age` (single numeric age input + explanatory card)
+10. `weight_changes` (chart info step with dynamic labels from current/target weight)
+11. `last_time_felt_good` (single-select)
+12. `meals_per_day` (single-select with contextual success card)
+13. `activity_level` (single-select with contextual activity card)
+14. `perfect_solution` (single-select)
+15. `cooking_time` (single-select with help card)
+16. `have_allergies` (single-select branching)
+17. `allergies` (custom multi-select; exclusive `None`, auto-advance)
+18. `omit_nonos` (custom multi-select; exclusive `I eat them all`, auto-advance)
+19. `specialists` (info screen with specialist cards)
+20. `do_you_have_medical_conditions` (single-select branching)
+21. `what_medical_conditions` (custom multi-select + disclaimer + sticky footer CTA)
+22. `special_event` (single-select, auto-advance)
+23. `event_date` (date input)
+24. `weight_loss_forecast` (dynamic forecast values from prior answers)
+25. email step (`/email/uni-s-mb-pbp-sugar`)
 
 Additional question keys are registered in `FUNNEL_QUESTION_ORDER` and route mapping, but many still resolve to fallback implemented screens until dedicated UI is built.
 
@@ -102,6 +135,26 @@ Additional question keys are registered in `FUNNEL_QUESTION_ORDER` and route map
 Main files:
 - `src/components/quiz/BodyGoalsQuestion.tsx`
 - `src/components/quiz/FunnelStepPage.tsx`
+
+---
+
+## Weight + Forecast Notes
+
+- `?question=weight` uses `WeightQuestion.tsx`:
+  - segmented `LB/KG`
+  - input typography set to `text-[3rem] font-semibold`
+  - dynamic BMI callout appears after value entry, computed from saved height (`step 6`) + current weight
+  - height parser accepts `cm`, `ft/in`, apostrophe format (`5'9`) and numeric-cm fallback for older stored values
+- `?question=target_weight` uses `TargetWeightQuestion.tsx`:
+  - kg-only numeric input
+  - input typography set to `text-[3rem] font-semibold`
+  - dynamic warning card appears when target BMI is outside healthy range (not hardcoded)
+- `?question=weight_changes` uses `WeightChangesQuestion.tsx`:
+  - info/chart step
+  - badge values are derived from previously entered current and target weights
+- `?question=weight_loss_forecast` uses `WeightLossForecastQuestion.tsx`:
+  - dynamic month labels + weight labels from current weight, target weight, and event date
+  - dynamic "goal by" date from `event_date`
 
 ---
 
@@ -131,5 +184,20 @@ Main files:
 - [x] Question-order-based progress calculation (no fixed 8-step progress map)
 - [x] `main_goal` and `body_goals` DOM IDs/test IDs aligned with live structure
 - [x] `body_goals` custom connectors + gender-specific body image
+- [x] Mid-funnel custom screens added (`meals_per_day`, `activity_level`, `perfect_solution`, `cooking_time`)
+- [x] Allergy/nonos flow implemented with exclusive multi-select behavior + auto-advance
+- [x] Medical flow implemented (`specialists`, `do_you_have_medical_conditions`, `what_medical_conditions`, `special_event`, `event_date`)
+- [x] `studies_prove`, `height`, `weight`, `target_weight`, `age`, `weight_changes`, `weight_loss_forecast` implemented with dedicated components
+- [x] Dynamic BMI feedback on `weight` (not hardcoded)
+- [x] Dynamic target-weight health-range warning on `target_weight` (not hardcoded)
+- [x] Dynamic current/target labels wired into `weight_changes` chart
+- [x] Dynamic forecast values wired into `weight_loss_forecast`
 - [ ] Full ~28-question UI parity (many question keys still need dedicated screens)
 - [ ] Complete visual parity QA for all breakpoints
+
+---
+
+## Next Session (Info Only)
+
+- First task for tomorrow: set next route after `?question=weight_loss_forecast` to `?question=wellness_summary`.
+- Note: documentation-only reminder; route behavior not changed in this update.

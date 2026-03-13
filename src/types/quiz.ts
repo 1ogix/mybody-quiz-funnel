@@ -9,6 +9,7 @@ export interface Answer {
   id: string;
   label: string;
   emoji?: string;
+  imageSrc?: string;
   nextStep?: number;
 }
 

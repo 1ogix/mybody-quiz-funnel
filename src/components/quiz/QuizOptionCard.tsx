@@ -1,10 +1,13 @@
 "use client";
 
+import Image from "next/image";
+
 interface QuizOptionCardProps {
   id?: string;
   testId?: string;
   label: string;
   emoji?: string;
+  imageSrc?: string;
   selected?: boolean;
   onClick: () => void;
 }
@@ -14,6 +17,7 @@ export default function QuizOptionCard({
   testId,
   label,
   emoji,
+  imageSrc,
   selected = false,
   onClick,
 }: QuizOptionCardProps) {
@@ -52,19 +56,27 @@ export default function QuizOptionCard({
         }
       }}
     >
-      {/* Emoji / image */}
-      {emoji && (
+      {/* Image / emoji */}
+      {(imageSrc || emoji) && (
         <div
           className="mr-4 shrink-0 flex items-center justify-center overflow-hidden"
           style={{
             width: 48,
             height: 48,
             borderRadius: "0.5rem",
-            fontSize: 48,
-            lineHeight: 1,
           }}
         >
-          {emoji}
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt={label}
+              width={48}
+              height={48}
+              className="h-12 w-12 object-cover"
+            />
+          ) : (
+            <span style={{ fontSize: 48, lineHeight: 1 }}>{emoji}</span>
+          )}
         </div>
       )}
 

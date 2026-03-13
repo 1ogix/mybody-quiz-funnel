@@ -148,7 +148,7 @@
   --text-title-small: 1.5rem;
   --text-title-small--line-height: 2rem;
 
-  /* Body scale */
+  /* Body scale */  
   --text-body-large: 1.125rem;
   --text-body-large--line-height: 1.75rem;
   --text-body-regular: 1rem;
@@ -183,6 +183,13 @@
   --radius-xl: 1rem;
   --radius-xxl: 1.5rem;
   --radius-full: 9999px;
+  --z-index-hide: -1;
+  --z-index-above: 10;
+  --z-index-sticky: 1100;
+  --z-index-overlay: 1200;
+  --z-index-modal: 1300;
+  --z-index-popover: 1400;
+  --z-index-tooltip: 1500;
 }
 
 * {
@@ -200,6 +207,10 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.body-small {
+  font-size: var(--text-body-small);
+  line-height: var(--tw-leading, var(--text-body-small--line-height));
 }
 
 /* Animations */
@@ -251,7 +262,20 @@ body {
    Global typography utilities
    Values extracted from mybody.health CSS bundle (:root tokens)
    ───────────────────────────────────────────────────────────── */
-
+   .headline1 {
+    font-family: var(--font-family-headline);
+    font-size: var(--text-h1-mobile);
+    line-height: var(--tw-leading, var(--text-h1-mobile--line-height));
+    --tw-font-weight: var(--font-weight-headline);
+    font-weight: var(--font-weight-headline);
+}
+@media (min-width: 40em) {
+  .headline1
+{
+      font-size: var(--text-h1);
+      line-height: var(--tw-leading, var(--text-h1--line-height));
+  }
+}
 /*
  * .headline2
  * --text-h2-mobile: 1.75rem / line-height 2.5rem  (mobile)
@@ -262,12 +286,26 @@ body {
   font-size: 1.75rem;
   line-height: 2.5rem;
   font-weight: 600;
-  color: var(--color-secondary-main);
+  /* color: var(--color-secondary-main); */
 }
-@media (min-width: 62em) {
+@media (min-width: 40em) {
   .headline2 {
-    font-size: 2.5rem;
-    line-height: 3.5rem;
+      font-size: var(--text-h2);
+      line-height: var(--tw-leading, var(--text-h2--line-height));
+  }
+}
+
+.headline3 {
+  font-family: var(--font-family-headline);
+  font-size: var(--text-h3-mobile);
+  line-height: var(--tw-leading, var(--text-h3-mobile--line-height));
+  --tw-font-weight: var(--font-weight-headline);
+  font-weight: var(--font-weight-headline);
+}
+@media (min-width: 40em) {
+  .headline3 {
+    font-size: var(--text-h3);
+    line-height: var(--tw-leading, var(--text-h3--line-height));
   }
 }
 
@@ -285,6 +323,13 @@ body {
       line-height: var(--tw-leading, var(--text-h4--line-height));
   }
 }
+
+.headline6
+ {
+    font-size: var(--text-h6)!important;
+    line-height: var(--tw-leading, var(--text-h6--line-height))!important;
+    font-weight: var(--font-weight-headline)!important;
+}
 /*
  * .body-regular — --text-body-regular: 1rem / line-height 1.5rem
  */
@@ -299,6 +344,27 @@ body {
 .body-large {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+@media (min-width: 40em) {
+  .tablet\:body-large {
+    font-family: var(--font-family-body);
+    font-size: var(--text-body-large);
+    line-height: var(--tw-leading, var(--text-body-large--line-height));
+  }
+}
+.title-regular, .title-small {
+  font-family: var(--font-family-headline);
+  --tw-font-weight: var(--font-weight-headline);
+  font-weight: var(--font-weight-headline);
+}
+.title-regular {
+  font-size: var(--text-title-regular);
+  line-height: var(--tw-leading, var(--text-title-regular--line-height));
+}
+.title-small {
+  font-size: var(--text-title-small)!important;
+  line-height: var(--tw-leading, var(--text-title-small--line-height))!important;
 }
 
 /*
@@ -321,6 +387,24 @@ body {
   .section-p-hero {
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
+}
+
+.section-p-large {
+  padding-block: calc(var(--spacing) * 10);
+}
+@media (min-width: 40em) {
+  .section-p-large {
+    padding-block: calc(var(--spacing) * 12);
+  }
+}
+
+.section-p-small {
+  padding-block: calc(var(--spacing) * 6);
+}
+@media (min-width: 40em) {
+  .section-p-small {
+    padding-block: calc(var(--spacing) * 8);
   }
 }
 
@@ -479,4 +563,32 @@ body {
 }
 .startnow-btn:active {
   transform: scale(0.98);
+}
+
+.z-sticky
+ {
+    z-index: var(--z-index-sticky)!important;
+}
+
+.text-danger-main {
+  color: var(--color-danger-main);
+}
+
+.rounded-l {
+  border-radius: var(--radius-l);
+}
+
+.caption {
+  font-family: var(--font-family-body);
+  font-size: var(--text-caption);
+  line-height: var(--tw-leading, var(--text-caption--line-height));
+}
+
+.section-bg-tertiary-400 {
+  --section-background-color: var(--color-tertiary-400);
+}
+
+.shadow-l {
+  --tw-shadow: 0 1rem 2rem var(--tw-shadow-color, #0000000a);
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
 }
