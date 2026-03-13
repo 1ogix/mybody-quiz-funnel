@@ -79,7 +79,7 @@ export default function StartnowPage() {
          *
          * Images are children here but position:absolute so they fill <section>.
          */}
-        <div className="startnow-container startnow-grid mx-auto h-full">
+        <div className="startnow-container startnow-grid mx-auto h-full w-full">
 
           {/* ── Background images (absolutely fill the <section>) ─────── */}
           {/* mobile only — block up to tablet (40em / 640px) */}
