@@ -706,8 +706,7 @@ export default function CheckoutResultPage() {
         <div
           data-state="open"
           className="p-0 fixed left-0 top-0 flex items-center justify-center h-dvh w-screen bg-[rgba(0,0,0,0.6)] tablet:p-8"
-          style={{ zIndex: "var(--z-index-overlay)" }}
-          style={{ pointerEvents: "auto" }}
+          style={{ zIndex: "var(--z-index-overlay)", pointerEvents: "auto" }}
           onClick={(e) => {
             if (e.target === e.currentTarget) setShowGuaranteeModal(false);
           }}
