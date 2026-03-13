@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import MyBodyLogo from "@/components/layout/MyBodyLogo";
 import { FUNNEL_CODE, getCheckoutPath } from "@/data/funnelRoutes";
@@ -66,7 +66,7 @@ function FiveStars() {
   );
 }
 
-export default function FunnelLoaderPage() {
+function FunnelLoaderContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [progress, setProgress] = useState(0);
@@ -287,5 +287,13 @@ export default function FunnelLoaderPage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function FunnelLoaderPage() {
+  return (
+    <Suspense>
+      <FunnelLoaderContent />
+    </Suspense>
   );
 }

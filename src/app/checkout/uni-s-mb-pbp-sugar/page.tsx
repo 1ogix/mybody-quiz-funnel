@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import MyBodyLogo from "@/components/layout/MyBodyLogo";
@@ -881,7 +881,7 @@ function PaymentStep({
   );
 }
 
-export default function FunnelCheckoutPage() {
+function FunnelCheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { answers } = useQuizState();
@@ -937,5 +937,13 @@ export default function FunnelCheckoutPage() {
         <NameStep onSubmit={handleNameSubmit} />
       )}
     </>
+  );
+}
+
+export default function FunnelCheckoutPage() {
+  return (
+    <Suspense>
+      <FunnelCheckoutContent />
+    </Suspense>
   );
 }
